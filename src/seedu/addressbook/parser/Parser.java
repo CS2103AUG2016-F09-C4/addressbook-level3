@@ -2,6 +2,7 @@ package seedu.addressbook.parser;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.parser.Parser.ParseException;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -26,6 +27,11 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
+    private static final Pattern PERSON_EDIT_DATA_ARGS_FORMAT = 
+            Pattern.compile("(?<targetIndex>[^/]+)"
+                    + "(?<phone>(?: p/[^/]+)*)"
+                    + "(?<email>(?: e/[^/]+)*)"
+                    + "(?<address>(?: a/[^/]+)*)");
 
     /**
      * Signals that the user input could not be parsed.
@@ -67,6 +73,9 @@ public class Parser {
 
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
+                
+            case EditCommand.COMMAND_WORD:
+                return prepareEdit(arguments);
 
             case FindCommand.COMMAND_WORD:
                 return prepareFind(arguments);
@@ -87,6 +96,39 @@ public class Parser {
             default:
                 return new HelpCommand();
         }
+    }
+
+    private Command prepareEdit(String args) {
+        final Matcher matcher = PERSON_EDIT_DATA_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+        try {
+            return new EditCommand(
+                    parseArgsAsDisplayedIndex(matcher.group("targetIndex")),
+
+                    isContactToBeEdited(matcher.group("phone")),
+                    matcher.group("phone").replaceFirst(" p/", ""),
+                    
+                    isContactToBeEdited(matcher.group("email")),
+                    matcher.group("email").replaceFirst(" e/", ""),
+                    
+                    isContactToBeEdited(matcher.group("address")),
+                    matcher.group("address").replaceFirst(" a/", "")
+            );
+        } catch (NumberFormatException | ParseException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        } 
+    }
+    
+    /**
+     * Checks whether the contact field is to be edited
+     */
+    private static boolean isContactToBeEdited(String args) {
+        return !args.isEmpty();
     }
 
     /**
