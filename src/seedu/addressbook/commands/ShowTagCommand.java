@@ -20,6 +20,10 @@ import seedu.addressbook.data.tag.Tag;
  */
 public class ShowTagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
+            + "Show non-private information of persons containing specific tags"
+            + "Example: tag students class2019";
     
     private final Set<String> tags;
     private final Set<String> tagsNotFound;
