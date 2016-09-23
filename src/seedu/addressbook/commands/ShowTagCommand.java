@@ -38,6 +38,9 @@ public class ShowTagCommand extends Command {
     }
 
     @Override
+    /**
+     * Get result of the command where only non-private information of the person's data is shown.
+     */
     public CommandResult execute() {
         final List<ReadOnlyPerson> personsFound = getPersonsWithTags(tags);
         return new CommandResult(getMessageForShowTagsSummary(personsFound, tagsNotFound), personsFound);
