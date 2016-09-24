@@ -28,9 +28,9 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Person edited: %1$s";    
     
-    private Phone newPhone = new Phone(DEFAULT_PHONE_STRING, false);
-    private Email newEmail = new Email(DEFAULT_PERSON_EMAIL, false);
-    private Address newAddress = new Address(DEFAULT_PERSON_ADDRESS, false);
+    private Phone newPhone;
+    private Email newEmail;
+    private Address newAddress;
     private boolean isPhoneToBeEdit;
     private boolean isEmailToBeEdit;
     private boolean isAddressToBeEdit;
@@ -52,6 +52,10 @@ public class EditCommand extends Command {
         this.isEmailToBeEdit = isEmailToBeEdited;
         this.isAddressToBeEdit = isAddressToBeEdited;
 
+        newPhone = null;
+        newEmail = null;
+        newAddress = null;
+        
         if (isPhoneToBeEdited) {
             newPhone = new Phone(phone, false);
         } 
