@@ -98,6 +98,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the edit person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    
     private Command prepareEdit(String args) {
         final Matcher matcher = PERSON_EDIT_DATA_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format

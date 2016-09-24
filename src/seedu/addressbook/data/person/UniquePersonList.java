@@ -5,6 +5,8 @@ import seedu.addressbook.data.exception.DuplicateDataException;
 
 import java.util.*;
 
+import static seedu.addressbook.ui.Gui.DISPLAYED_INDEX_OFFSET;
+
 /**
  * A list of persons. Does not allow null elements or duplicates.
  *
@@ -92,6 +94,14 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+    
+    /**
+     * Edits a person in the list.
+     *
+     */
+    public void edit(Person toEdit, Integer targetIndex) {
+        internalList.set(targetIndex - DISPLAYED_INDEX_OFFSET,toEdit);
     }
 
     /**

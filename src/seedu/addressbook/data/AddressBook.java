@@ -81,6 +81,15 @@ public class AddressBook {
         syncTagsWithMasterList(toAdd);
         allPersons.add(toAdd);
     }
+    
+    /**
+     * Edits a person in the address book.
+     * No changes to tags are made.
+     *
+     */
+    public void editPerson(Person toEdit, Integer targetIndex) {
+        allPersons.edit(toEdit,targetIndex);
+    }
 
     /**
      * Adds a tag to the list of tags present in the address book.
