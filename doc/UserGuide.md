@@ -99,6 +99,17 @@ Examples:
 Clears all entries from the address book.<br>
 Format: `clear`  
 
+## Changing a theme : `theme`
+ Changes the theme of the app. Irreversible.<br>
+ Format: `theme NEW_THEME`
+ 
+ > Changes the theme of the app.
+ 
+ Examples: 
+ * `theme Light`<br>
+   Changes the theme of the app to Light theme.
+ 
+ 
 ## Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
