@@ -74,6 +74,22 @@ Use case ends.
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
 
+#### Use case: Change theme
+ 
+ **MSS**
+ 
+ 1. User requests to change to a new theme
+ 2. AddressBook changes the theme
+ Use case ends.
+ 
+ **Extensions**
+ 
+ 1a. The theme to be renamed does not exist
+ 
+ > 1a1. AddressBook shows an error message <br>
+   Use case ends
+ 
+ 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 8 or higher installed.
