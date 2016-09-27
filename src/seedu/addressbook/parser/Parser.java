@@ -91,6 +91,9 @@ public class Parser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+                
+            case ShowTagCommand.COMMAND_WORD:
+                return new ShowTagCommand(arguments);
 
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
